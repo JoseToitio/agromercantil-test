@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0"><i class="fas fa-truck mr-2"></i>Caminhões Cadastrados</h4>
+    </div>
+    <div class="card-body">
+        <!-- Mensagem de carregamento -->
+        <div class="text-center p-5" ng-if="vm.loading">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Carregando...</span>
+            </div>
+            <p class="mt-2">Carregando caminhões...</p>
+        </div>
+
+        <!-- Mensagem de erro -->
+        <div class="alert alert-danger" ng-if="vm.error">
+            <i class="fas fa-exclamation-circle mr-2"></i>{{ vm.error }}
+        </div>
+
+        <!-- Tabela de caminhões -->
+        <div ng-if="!vm.loading && !vm.error">
+            <div class="alert alert-info" ng-if="vm.trucks.length === 0">
+                <i class="fas fa-info-circle mr-2"></i>Nenhum caminhão cadastrado. <a href="/trucks/new" class="alert-link">Cadastrar um novo caminhão</a>.
+            </div>
+
+            <div class="table-responsive" ng-if="vm.trucks.length > 0">
+                <table class="table table-striped table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Placa</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Ano</th>
+                            <th>Valor FIPE</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="truck in vm.trucks">
+                            <td>{{ truck.id }}</td>
+                            <td>{{ truck.licensePlate }}</td>
+                            <td>{{ truck.brand }}</td>
+                            <td>{{ truck.model }}</td>
+                            <td>{{ truck.manufacturingYear }}</td>
+                            <td>R$ {{ truck.fipePrice | number:2 }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" ng-click="vm.editTruck(truck.id)">
+                                    <i class="fas fa-edit mr-1"></i>Editar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a href="/trucks/new" class="btn btn-success">
+            <i class="fas fa-plus mr-2"></i>Novo Caminhão
+        </a>
+    </div>
+</div>
