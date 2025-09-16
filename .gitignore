@@ -1,0 +1,78 @@
+# =========================
+# Node / Angular Front-end
+# =========================
+
+# Node modules
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+frontend/build/
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# Temporary files
+frontend/tmp/
+frontend/temp/
+frontend/*.tmp
+
+# Environment variables
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# Coverage
+frontend/coverage/
+
+# IDE/editor files
+frontend/.vscode/
+frontend/.idea/
+frontend/*.sublime-workspace
+frontend/*.sublime-project
+
+# OS files
+frontend/.DS_Store
+frontend/Thumbs.db
+
+# =========================
+# Java / Spring Boot Back-end
+# =========================
+
+# Compiled class files
+backend/**/*.class
+
+# Maven / Gradle build folders
+backend/target/
+backend/build/
+
+# Logs
+backend/*.log
+
+# IDE/editor files
+backend/.idea/
+backend/*.iml
+backend/*.ipr
+backend/*.iws
+backend/.vscode/
+
+# Eclipse
+backend/.project
+backend/.classpath
+backend/.settings/
+
+# NetBeans
+backend/nbproject/private/
+
+# OS files
+backend/.DS_Store
+backend/Thumbs.db
+
+# Environment variables
+backend/.env
+
+# Spring Boot properties
+backend/application-*.yml
+backend/application-*.properties
