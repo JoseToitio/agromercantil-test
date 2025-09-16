@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API de Gerenciamento de Frota de Caminhões</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .content {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .link-card {
+            display: flex;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .link-card a {
+            display: block;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            flex: 1;
+            transition: background-color 0.3s;
+        }
+        .link-card a:hover {
+            background-color: #0056b3;
+        }
+        .link-description {
+            flex: 3;
+            padding: 15px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>API de Gerenciamento de Frota de Caminhões</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Bem-vindo à API de Gerenciamento de Frota de Caminhões</h2>
+            <p>Esta API fornece endpoints para gerenciar uma frota de caminhões, incluindo cadastro, listagem e atualização de informações, com integração à API FIPE para validação de dados e obtenção de valores de referência.</p>
+            
+            <h3>Links Úteis</h3>
+            
+            <div class="link-card">
+                <a href="/swagger-ui.html" target="_blank">Swagger UI</a>
+                <div class="link-description">
+                    Documentação interativa da API com Swagger UI. Você pode explorar e testar todos os endpoints disponíveis.
+                </div>
+            </div>
+            
+            <div class="link-card">
+                <a href="/api-docs" target="_blank">API Docs</a>
+                <div class="link-description">
+                    Documentação da API em formato JSON para integração com outras ferramentas.
+                </div>
+            </div>
+            
+            <div class="link-card">
+                <a href="/h2-console" target="_blank">H2 Console</a>
+                <div class="link-description">
+                    Console de administração do banco de dados H2 (em memória). Use "sa" como usuário e deixe a senha em branco para acessar.
+                </div>
+            </div>
+            
+            <div class="link-card">
+                <a href="/api/trucks" target="_blank">API de Caminhões</a>
+                <div class="link-description">
+                    Endpoint principal para listar todos os caminhões cadastrados no sistema.
+                </div>
+            </div>
+            
+            <h3>Endpoints Principais</h3>
+            <ul>
+                <li><strong>GET /api/trucks</strong> - Lista todos os caminhões</li>
+                <li><strong>GET /api/trucks/{id}</strong> - Busca um caminhão pelo ID</li>
+                <li><strong>POST /api/trucks</strong> - Cadastra um novo caminhão</li>
+                <li><strong>PUT /api/trucks/{id}</strong> - Atualiza um caminhão existente</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Sistema de Gerenciamento de Frota de Caminhões &copy; 2025</p>
+        </div>
+    </footer>
+</body>
+</html>
