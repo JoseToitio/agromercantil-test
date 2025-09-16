@@ -1,0 +1,70 @@
+<div class="card">
+    <div class="card-header bg-info text-white">
+        <h4 class="mb-0">
+            <i class="fas fa-info-circle mr-2"></i>
+            Ajuda para Validação FIPE
+        </h4>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
+            <strong>Atenção:</strong> Para que a validação FIPE funcione corretamente, é importante seguir as instruções abaixo.
+        </div>
+
+        <h5>Como funciona a validação FIPE?</h5>
+        <p>A validação FIPE é um processo que verifica se os dados do caminhão (marca, modelo e ano) existem na tabela FIPE e obtém o valor de referência. Além dos parâmetros obrigatórios, a API também aceita parâmetros opcionais como mês de referência e token de assinatura.</p>
+        
+        <h5>Parâmetros da API FIPE:</h5>
+        <ul>
+            <li><strong>Obrigatórios:</strong>
+                <ul>
+                    <li><code>brand</code> - Marca do veículo</li>
+                    <li><code>model</code> - Modelo do veículo</li>
+                    <li><code>year</code> - Ano de fabricação</li>
+                </ul>
+            </li>
+            <li><strong>Opcionais:</strong>
+                <ul>
+                    <li><code>reference</code> - Mês e ano de referência (padrão: 278)</li>
+                    <li><code>token</code> - Token de assinatura para acesso à API FIPE</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h5>Problemas comuns:</h5>
+        <ol>
+            <li>
+                <strong>Erro 400 (Bad Request):</strong>
+                <ul>
+                    <li>Ocorre quando os dados enviados não são encontrados na tabela FIPE.</li>
+                    <li>Verifique se a marca, modelo e ano estão escritos exatamente como aparecem na tabela FIPE.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Dados não encontrados:</strong>
+                <ul>
+                    <li>Alguns modelos mais antigos ou específicos podem não estar disponíveis na tabela FIPE.</li>
+                    <li>Tente usar a página de teste FIPE para verificar quais dados estão disponíveis.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h5>Dicas para uso correto:</h5>
+        <ol>
+            <li>Sempre selecione a marca primeiro, depois o modelo e por último o ano.</li>
+            <li>Aguarde o carregamento completo das opções antes de prosseguir para o próximo campo.</li>
+            <li>Se receber um erro, verifique se os dados estão corretos usando a página de teste FIPE.</li>
+            <li>Lembre-se que a tabela FIPE é atualizada periodicamente, então alguns valores podem mudar com o tempo.</li>
+        </ol>
+
+        <div class="alert alert-info mt-4">
+            <h6><i class="fas fa-lightbulb mr-2"></i>Solução de problemas:</h6>
+            <p>Se continuar enfrentando problemas com a validação FIPE, você pode:</p>
+            <ul>
+                <li>Usar a página de <a href="/fipe-test">Teste FIPE</a> para verificar quais dados estão disponíveis.</li>
+                <li>Verificar o console do navegador para ver mensagens de erro detalhadas (F12 > Console).</li>
+                <li>Tentar com diferentes combinações de marca, modelo e ano.</li>
+            </ul>
+        </div>
+    </div>
+</div>
