@@ -1,0 +1,84 @@
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0"><i class="fas fa-truck mr-2"></i>{{ vm.isEditing ? 'Editar Caminhão' : 'Novo Caminhão' }}</h4>
+    </div>
+    <div class="card-body">
+        <!-- Loading do caminhão -->
+        <div class="text-center p-5" ng-if="vm.loadingTruck">
+            <div class="spinner-border text-primary" role="status"><span class="sr-only">Carregando...</span></div>
+            <p class="mt-2">Carregando dados do caminhão...</p>
+        </div>
+
+        <!-- Erro e sucesso -->
+        <div class="alert alert-danger" ng-if="vm.error"><i class="fas fa-exclamation-circle mr-2"></i>{{ vm.error }}</div>
+        <div class="alert alert-success" ng-if="vm.success"><i class="fas fa-check-circle mr-2"></i>{{ vm.success }}</div>
+
+        <!-- Formulário -->
+        <form name="truckForm" ng-submit="truckForm.$valid && vm.saveTruck()" novalidate ng-if="!vm.loadingTruck">
+            <!-- Placa -->
+            <div class="form-group">
+                <label>Placa *</label>
+                <input type="text" class="form-control" ng-model="vm.truck.licensePlate" required ng-pattern="/[A-Z]{3}[0-9][0-9A-Z][0-9]{2}/">
+                <div class="text-danger" ng-if="truckForm.licensePlate.$touched && truckForm.licensePlate.$invalid">
+                    <small ng-if="truckForm.licensePlate.$error.required">Obrigatório.</small>
+                    <small ng-if="truckForm.licensePlate.$error.pattern">Formato inválido.</small>
+                </div>
+            </div>
+
+            <!-- Marca -->
+            <div class="form-group">
+                <label>Marca *</label>
+                <div class="d-flex align-items-center">
+                    <select class="form-control" ng-model="vm.truck.brand" ng-change="vm.loadModels()" ng-disabled="vm.loadingBrands">
+                        <option value="">Selecione</option>
+                        <option ng-repeat="brand in vm.brands" value="{{brand.code}}">{{brand.name}}</option>
+                    </select>
+                    <div ng-if="vm.loadingBrands" class="spinner-border spinner-border-sm text-primary ml-2"></div>
+                </div>
+            </div>
+
+            <!-- Modelo -->
+            <div class="form-group">
+                <label>Modelo *</label>
+                <div class="d-flex align-items-center">
+                    <select class="form-control" ng-model="vm.truck.model" ng-change="vm.loadYears()" ng-disabled="!vm.truck.brand || vm.loadingModels">
+                        <option value="">Selecione</option>
+                        <option ng-repeat="model in vm.models" value="{{model.code}}">{{model.name}}</option>
+                    </select>
+                    <div ng-if="vm.loadingModels" class="spinner-border spinner-border-sm text-primary ml-2"></div>
+                </div>
+            </div>
+
+            <!-- Ano -->
+            <div class="form-group">
+                <label>Ano *</label>
+                <div class="d-flex align-items-center">
+                    <select class="form-control" ng-model="vm.truck.manufacturingYear" ng-disabled="!vm.truck.model || vm.loadingYears">
+                        <option value="">Selecione</option>
+                        <option ng-repeat="year in vm.years" value="{{year.code}}">{{year.name}}</option>
+                    </select>
+                    <div ng-if="vm.loadingYears" class="spinner-border spinner-border-sm text-primary ml-2"></div>
+                </div>
+            </div>
+
+            <!-- Valor FIPE -->
+            <div class="form-group">
+                <label>Valor FIPE</label>
+                <input type="text" class="form-control" ng-model="vm.truck.fipePrice" readonly placeholder="Será preenchido após validação">
+            </div>
+
+            <!-- Botão validar FIPE -->
+            <button type="button" class="btn btn-info" ng-click="vm.validateFipe()" ng-disabled="vm.validating || !vm.truck.brand || !vm.truck.model || !vm.truck.manufacturingYear">
+                <i class="fas" ng-class="{'fa-sync fa-spin': vm.validating, 'fa-check': !vm.validating}"></i> {{ vm.validating ? 'Validando...' : 'Validar FIPE' }}
+            </button>
+
+            <hr>
+
+            <!-- Botões salvar/cancelar -->
+            <button type="submit" class="btn btn-primary" ng-disabled="truckForm.$invalid || vm.saving">
+                <i class="fas" ng-class="{'fa-sync fa-spin': vm.saving, 'fa-save': !vm.saving}"></i> {{ vm.saving ? 'Salvando...' : 'Salvar' }}
+            </button>
+            <button type="button" class="btn btn-secondary ml-2" ng-click="vm.cancel()">Cancelar</button>
+        </form>
+    </div>
+</div>
