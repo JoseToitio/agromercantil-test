@@ -1,0 +1,148 @@
+<div class="card">
+  <div class="card-header bg-primary text-white">
+    <h4 class="mb-0">
+      <i class="fas fa-truck me-2"></i>
+      {{ isEditing ? 'Editar Caminhão' : 'Novo Caminhão' }}
+    </h4>
+  </div>
+
+  <div class="card-body">
+    <!-- Loading -->
+    <div class="text-center p-5" *ngIf="loadingTruck">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p class="mt-2">Carregando dados do caminhão...</p>
+    </div>
+
+    <!-- Mensagens -->
+    @if (error) {
+      <div class="alert alert-danger">
+        <i class="fas fa-exclamation-circle me-2"></i> {{ error }}
+      </div>
+    }
+    @if (success) {
+      <div class="alert alert-success">
+        <i class="fas fa-check-circle me-2"></i> {{ success }}
+      </div>
+    }
+
+    <!-- Formulário -->
+    @if (!loadingTruck) {
+      <form [formGroup]="form" (ngSubmit)="saveTruck()">
+        <!-- Placa -->
+        <div class="form-group mb-3">
+          <label>Placa *</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="licensePlate"
+            placeholder="ABC1D23"
+          />
+          @if (form.get('licensePlate')?.touched && form.get('licensePlate')?.invalid) {
+            <div class="text-danger">
+              @if (form.get('licensePlate')?.hasError('required')) {
+                <small>Obrigatório.</small>
+              }
+              @if (form.get('licensePlate')?.hasError('pattern')) {
+                <small>Formato inválido.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Marca -->
+        <div class="form-group mb-3">
+          <label>Marca *</label>
+          <div class="d-flex align-items-center">
+            <select
+              class="form-control"
+              formControlName="brand"
+              (change)="loadModels()"
+              [disabled]="loadingBrands"
+            >
+              <option value="">Selecione</option>
+              @for (brand of brands; track $index) {
+                <option [value]="brand.code">{{ brand.name }}</option>
+              }
+            </select>
+            @if (loadingBrands) {
+              <div class="spinner-border spinner-border-sm text-primary ms-2"></div>
+            }
+          </div>
+        </div>
+
+        <!-- Modelo -->
+        <div class="form-group mb-3">
+          <label>Modelo *</label>
+          <div class="d-flex align-items-center">
+            <select
+              class="form-control"
+              formControlName="model"
+              (change)="loadYears()"
+              [disabled]="!form.get('brand')?.value || loadingModels"
+            >
+              <option value="">Selecione</option>
+              @for (model of models; track $index) {
+                <option [value]="model.code">{{ model.name }}</option>
+              }
+            </select>
+            @if (loadingModels) {
+              <div class="spinner-border spinner-border-sm text-primary ms-2"></div>
+            }
+          </div>
+        </div>
+
+        <!-- Ano -->
+        <div class="form-group mb-3">
+          <label>Ano *</label>
+          <div class="d-flex align-items-center">
+            <select
+              class="form-control"
+              formControlName="manufacturingYear"
+              [disabled]="!form.get('model')?.value || loadingYears"
+            >
+              <option value="">Selecione</option>
+              @for (year of years; track $index) {
+                <option [value]="year.code" >{{ year.name }}</option>
+              }
+            </select>
+            @if (loadingYears) {
+              <div class="spinner-border spinner-border-sm text-primary ms-2"></div>
+            }
+          </div>
+        </div>
+
+        <!-- Valor FIPE -->
+        <div class="form-group mb-3">
+          <label>Valor FIPE</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="fipePrice"
+            readonly
+            placeholder="Será preenchido após validação"
+          />
+        </div>
+
+        <!-- Botão validar FIPE -->
+        <button
+          type="button"
+          class="btn btn-info"
+          (click)="validateFipe()"
+          [disabled]="validating || !form.get('brand')?.value || !form.get('model')?.value || !form.get('manufacturingYear')?.value"
+        >
+          <i class="fas" [ngClass]="{ 'fa-sync fa-spin': validating, 'fa-check': !validating }"></i>
+          {{ validating ? 'Validando...' : 'Validar FIPE' }}
+        </button>
+
+        <hr />
+
+        <!-- Botões -->
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid || saving">
+          <i class="fas" [ngClass]="{ 'fa-sync fa-spin': saving, 'fa-save': !saving }"></i>
+          {{ saving ? 'Salvando...' : 'Salvar' }}
+        </button>
+        <button type="button" class="btn btn-secondary ms-2" (click)="cancel()">Cancelar</button>
+      </form>
+    }
+  </div>
+</div>
