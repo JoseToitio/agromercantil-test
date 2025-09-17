@@ -1,0 +1,44 @@
+<div class="jumbotron">
+  <h1 class="display-4">Sistema de Gerenciamento de Frota de Caminhões</h1>
+  <p class="lead">Bem-vindo ao sistema de gerenciamento de frota de caminhões para empresas de transporte no agronegócio.</p>
+  <hr class="my-4">
+  <p>Este sistema permite cadastrar, listar e atualizar informações de caminhões, com integração à API FIPE para validação de dados e obtenção de valores de referência.</p>
+  <div class="mt-4 d-flex gap-3">
+    <a class="btn btn-primary btn-lg mr-2" routerLink="/trucks" role="button">
+      <i class="fas fa-list mr-2"></i>Ver Caminhões
+    </a>
+    <a class="btn btn-success btn-lg" routerLink="/trucks/new" role="button">
+      <i class="fas fa-plus mr-2"></i>Cadastrar Caminhão
+    </a>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body text-center">
+        <i class="fas fa-truck fa-3x text-primary mb-3"></i>
+        <h5 class="card-title">Cadastro de Caminhões</h5>
+        <p class="card-text">Cadastre caminhões com informações detalhadas, incluindo marca, modelo, ano e placa.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body text-center">
+        <i class="fas fa-database fa-3x text-success mb-3"></i>
+        <h5 class="card-title">Integração com FIPE</h5>
+        <p class="card-text">Validação automática de dados na tabela FIPE e obtenção de valores de referência.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body text-center">
+        <i class="fas fa-edit fa-3x text-warning mb-3"></i>
+        <h5 class="card-title">Atualização de Dados</h5>
+        <p class="card-text">Mantenha sua frota sempre atualizada com informações precisas e valores de mercado.</p>
+      </div>
+    </div>
+  </div>
+</div>
