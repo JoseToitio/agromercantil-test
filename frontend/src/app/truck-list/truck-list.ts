@@ -24,7 +24,7 @@ export class TruckList {
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Erro ao carregar caminhões';
+        this.error = 'Erro ao carregar caminhões. O servidor backend pode estar indisponível.';
         this.loading = false;
       }
     });
